@@ -29,6 +29,12 @@ def decode_opus(x):
     pcms=[decoder.decode(i,frame_size) for i in x]
     return b''.join(pcms)
 
+def decode_fmt(x):
+    # input: json.loads(voicedata_log_fmt.select('vec_data_base64_str').take(1)[0]['vec_data_base64_str'])
+    decoder = opuslib.Decoder(rate, channels)
+    pcms=[decoder.decode(base64.b64decode(i),frame_size) for i in x]
+    return b''.join(pcms)
+    
 
 if __name__ == '__main__':
     x=[ 'AAAAOgE2kpVIp9FCRqp7FuLk15J3KraUUHe8zyQZJQP9hHuscVOzyzCVY2Uid9wTIJFiopUfd77HuEsV5CSKu+HtAAAAOQT7aChIqX9aNWUYDBfeZy+QR6fnXjHUHpI/e0q73nxivX60uZgJO5sDNb3I61FD0FbqpN07xLVptyH4DfYAAAA0AyJqN0ipSUKwmHOP8Rq4xnRYlNetsPOxkLZAqB2EY8Q3YviYwg5p7o80TIeDVUP70UKFJgKhmwIAAAAuFdI6WEin4fLL4uLwZ/0G6dHTf/SUqXgIuebFVGHd/8E7ivNln6TzQBHjkazMcl5L9EAAAAAkAlIP4kin4fiD/Ad5aA6iV12j8C6odsT5lrTYtmXgIQAC/efhw3fpYAAAADQCIgxASKfdWOEmIOL0y/+mwzf1z4qagjN/PIVhfWtZaQDjmdzfs3hbg6NTqsldagUA5uK26pqEFgAAADdNMZUASKgfRfEEPj74FmHCiAgtGtYnPnVURFQbyz0t82Y6p3wAY0Ve2w0rCA7e9wyMrYo5n7/QtVXVgAAAADcDnohxSKnOp8GuZv+MlhiyUYdCqeJlCX/2enRKpa7grz35lbrDyZkIeXeY2lvVgDp366usxw7VbqJKfAAAADk5VgvgSKvOcqNv2IfEBnxCW7qcQiKpc3SWuSrxM+3O9RufTJJ8xgDu6Jr5OWSExygrZKRtQ9kV/KO8G1sg',
