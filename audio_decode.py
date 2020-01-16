@@ -47,6 +47,6 @@ if __name__ == '__main__':
       ]
     opusx = extract_opusbytes(x)
     pcm = decode_opus(opusx)
-    print(pcm)
+    print(pcm[:10])
 
 
