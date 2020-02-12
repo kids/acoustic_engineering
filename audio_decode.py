@@ -29,12 +29,6 @@ def decode_opus(x):
     pcms=[decoder.decode(i,frame_size) for i in x]
     return b''.join(pcms)
 
-def decode_fmt(x):
-    # input: json.loads(voicedata_log_fmt.select('vec_data_base64_str').take(1)[0]['vec_data_base64_str'])
-    decoder = opuslib.Decoder(rate, channels)
-    pcms=[decoder.decode(base64.b64decode(i),frame_size) for i in x]
-    return b''.join(pcms)
-    
 
 if __name__ == '__main__':
     x=[ 'AAAAOgE2kpVIp9FCRqp7FuLk15J3KraUUHe8zyQZJQP9hHuscVOzyzCVY2Uid9wTIJFiopUfd77HuEsV5CSKu+HtAAAAOQT7aChIqX9aNWUYDBfeZy+QR6fnXjHUHpI/e0q73nxivX60uZgJO5sDNb3I61FD0FbqpN07xLVptyH4DfYAAAA0AyJqN0ipSUKwmHOP8Rq4xnRYlNetsPOxkLZAqB2EY8Q3YviYwg5p7o80TIeDVUP70UKFJgKhmwIAAAAuFdI6WEin4fLL4uLwZ/0G6dHTf/SUqXgIuebFVGHd/8E7ivNln6TzQBHjkazMcl5L9EAAAAAkAlIP4kin4fiD/Ad5aA6iV12j8C6odsT5lrTYtmXgIQAC/efhw3fpYAAAADQCIgxASKfdWOEmIOL0y/+mwzf1z4qagjN/PIVhfWtZaQDjmdzfs3hbg6NTqsldagUA5uK26pqEFgAAADdNMZUASKgfRfEEPj74FmHCiAgtGtYnPnVURFQbyz0t82Y6p3wAY0Ve2w0rCA7e9wyMrYo5n7/QtVXVgAAAADcDnohxSKnOp8GuZv+MlhiyUYdCqeJlCX/2enRKpa7grz35lbrDyZkIeXeY2lvVgDp366usxw7VbqJKfAAAADk5VgvgSKvOcqNv2IfEBnxCW7qcQiKpc3SWuSrxM+3O9RufTJJ8xgDu6Jr5OWSExygrZKRtQ9kV/KO8G1sg',
@@ -47,35 +41,6 @@ if __name__ == '__main__':
       ]
     opusx = extract_opusbytes(x)
     pcm = decode_opus(opusx)
-    print(pcm[:10])
-    
-    y=[
-     'SC1mdwPPqxNd+20rRCn/sKhGD54TqOEfZi4cxpQlJqPu/MkPjjH0',
-     'SIjXyQg9PYdICLEUpSu+ATsOJM8reUzVs16l9DbDoOfgeND9BTUOo5NkGn4=',
-     'SIyzkLVMxvQ2ThxqOfH2OQyrmRE0xXQ5Su5/J/0A8fLRNj+RyiFYdLzz+1i2iwylQUvmqsjQ',
-     'SI/0LSKLuuBxuqipLx6EQREu8Wgx+EpetqRYnR6oeoBhQeJEM6jAd+uFOmyqeYgK8g==',
-     'SJF4C2ggUETdtwUs9vQPeM6fAwDyuWvyTheixLRnQIHfkMb+5C/yCLkUhiRVkvVGPD1rsxMN4y6o/qk=',
-     'SJFE/4n+cAOiklFbd1dzs8tZtTz+kpb4DyiG7A+SgV1m0jzmsKFEctAfbbKXOV/rlBP/',
-     'SI8G2HqocgqLcaO4ItFZc8gCSYDg1KmDc2NvmkIQ+4MHsURDRbbtYkfDuVAwUqvHoAOCWUNg',
-     'SKSp0Aq7OJuw7txxqpvsX64On4WAaqHo4a77xzpJkS4P3MXVoWLSaD040hN+LJ6Vqo3g',
-     'SKDDB+BNJnxYqHiYAGhGChFw2LH0WaZTFfkxfkVzeW+CzR8nF6CmD6w/AAu5kiwzWw4=',
-     'SJ0Ha7RBgOV8iA0Fs3/iqrniMONtQB1et8qY8OQ3bV52qFdKWyt9RfLVpvoOYUYHLkA=',
-     'SJwfdDrlczeQZ6TO6utxR8mw/t7jYPXaf1RP7DrJrHAcFClD/tJI2o5YjDUXRuA=',
-     'SJujCDV65i6RLnBFem1CcVNMXGmujXE6wSrqn4TjWDwhs1rkOersGV94',
-     'SImdxMWrf7oXflTuhKBa64ueCRAal3NYQKA/zwxk7nZpYNbNib1onsNMkw==',
-     'SIHTxJpUxWrrtLB8F3y1/VG0s7IU/va8B0N+h0ZGcWJM4fbJjQdjYqGbmPKR4MUVY3KTym5a0hHWrIY=',
-     'SKz+Ujg6gn9EXDfhcxHRN/YVrSOoKrM/F1Q1G+ekeY+rwohUVVIOl3O1CbWE9wPsM4Q4Vig9bBPXx5FXGoA=',
-     'SKxtmtx0BOyV8ZHwCdmX9Mh4NGcibaY1WCuynp49692TQjw6ocnayn/FTFS2m7kiOIA=',
-     'SKliJoLaktYZNwfwY3YPJlDU83QF7OVaXyrno6fkXkYJNNGxUYgqpX5KxDCRslklSyynwA==',
-     'SKX9Lxqd/4tw8CnlV2XxWjR8vr7geNhtnCAQ5loEz4d/SFG4a2lWkleEXMueL7hHgA==',
-     'SKUkhxrT1oQuxjTu0F0zRB+PVJ1eZoEtYXhDLajx/AQYDT+7ExEQ+/tdugeVWHY/GQ==',
-     'SKUyokNKNQk8oayd7LpAi+7fsiV1w2nknt4B0wFP28XEdab8HdEg66ABmFL9+nhxVCY1xRtwqc3A',
-     'SKaaWFl1by7X6Npz+lSHqgtSyhcLbi3NtUXn9y58sDakEAlnPunYyYIP1A/KCUMn3oA7aitq3i0g',
-     'SK01cibSUNFvAUk6yy/tpX2PSF57OtvE7gZF7rHle5dMLpsDWmXdD2btphNdj8H1TFpE5Wa8k17DqIWVyIw=',
-     'SK6f8S0wQV64Cotnn5ebo3pRs/fvYI0y7uzA7lgT6TzMsAovM+4S+/m5Poi+aTCl68zAwGqokwv9gA==',
-     'SK33I9G9SCdKILk39HXyfn3atW/8bNht64GsjDa7X3K49SgqVHP0ir9PX8DysMNoWR5SKBlBSARo',
-     'SIzRljZSng/4JjjMmWP5uMARrh0qbe9VPFS4nveVL86A']
-     pcm = decode_fmt(y)
-     print(y[:10])
+    print(pcm)
 
 
